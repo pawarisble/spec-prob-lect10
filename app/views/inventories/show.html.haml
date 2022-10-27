@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @inventory.user
+%p
+  %b Item:
+  = @inventory.item
+%p
+  %b Price:
+  = @inventory.price
+%p
+  %b Timestamp:
+  = @inventory.timestamp
+
+= link_to 'Edit', edit_inventory_path(@inventory)
+\|
+= link_to 'Back', inventories_path

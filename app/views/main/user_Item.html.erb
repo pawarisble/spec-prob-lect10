@@ -1,0 +1,21 @@
+
+<p>User : <%= @user.name %></p>
+<table>
+
+    <th>Item_name</th>
+    <th>Item_price</th>
+    <th>Stock</th>
+    <th>Edit</th>
+    <th>Delete</th>
+
+    <% @user.items.each do |u| %>
+        <tr>
+            <td><%= u.name %></td>
+            <td><%= u.price %></td>
+            <td><%= u.stock %></td>
+            <td><%= link_to 'EDIT', '/items/' + u.id.to_s + '/edit' %></td>
+            <td><%= button_to "DELETE", u, method: :delete %></td>
+        </tr>
+    <%end%>
+
+</table>
