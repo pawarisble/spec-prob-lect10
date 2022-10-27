@@ -7,7 +7,7 @@ class MainController < ApplicationController
     u = User.where(login: params[:login]).first
     if u && u.authenticate(params[:password])
 
-      redirect_to "/"
+      redirect_to main_user_Item_path
 
       session[:logged_in] = true
       session[:login_user_id] = u.id
