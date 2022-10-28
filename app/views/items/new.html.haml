@@ -2,4 +2,7 @@
 
 = render 'form'
 
-= link_to 'Back', items_path
+- if(session[:from_user_item] == true)
+    %li=   link_to "Back to items", main_user_Item_path
+- else
+    %li=   link_to 'Back', items_path

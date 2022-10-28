@@ -1,0 +1,19 @@
+
+<br>
+<p>This is <%= @user.name %>'s inventory</p>
+<table  class="table text-center table-dark table-striped table-hover">
+    <th>Seller</th>
+    <th>Item_name</th>
+    <th>Item_price</th>
+    <th>Timestamp</th>
+
+    <% @user.inventories.each do |u| %>
+        <tr>
+        <td><%= User.find(Item.find(u.item_id).user_id).name %></td>
+        <td><%= Item.find(u.item_id).name %></td>
+        <td><%= u.price %></td>
+        <td><%= u.timestamp %></td>
+        </tr>
+    <%end%>
+
+</table>

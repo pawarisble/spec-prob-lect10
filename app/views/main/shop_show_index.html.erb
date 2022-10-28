@@ -1,0 +1,42 @@
+<% if params[:buyzero] %>
+    <div class="alert alert-danger" role="alert">
+        You cannot buy this item anymore, it's already sold out
+    </div>
+<% elsif params[:buysuccess] %>
+    <div class="alert alert-success" role="alert">
+        This item has been added to your inventory
+    </div>
+<%end%>
+
+
+
+<% if session[:logged_in] %>
+    <p>You are user : <%= @user_login_id.name %></p>
+<% else %>
+    <p> You can buy items when you login </p>
+<%end%>
+
+
+<br>
+<p>This is <%= @user.name %>'s shop</p>
+<table  class="table text-center table-dark table-striped table-hover">
+
+    <th>Item_name</th>
+    <th>Item_price</th>
+    <th>Stock</th>
+    <% if session[:logged_in] %>
+    <th>BUY</th>
+    <% end %>
+
+    <% @user.items.each do |u| %>
+        <tr>
+            <td><%= u.name %></td>
+            <td><%= u.price %></td>
+            <td><%= u.stock %></td>
+            <% if session[:logged_in] %>
+                <td><%= button_to "Buy", main_buy_item_path, params:{item_id:u.id, from_shop_user_id:@user.id} %></td>
+            <% end %>
+        </tr>
+    <%end%>
+
+</table>
