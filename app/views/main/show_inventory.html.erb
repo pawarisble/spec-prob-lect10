@@ -4,16 +4,23 @@
 <table  class="table text-center table-dark table-striped table-hover">
     <th>Seller</th>
     <th>Item_name</th>
+    <th>Picture</th>
     <th>Item_price</th>
     <th>Timestamp</th>
 
     <% @user.inventories.each do |u| %>
-        <tr>
-        <td><%= User.find(Item.find(u.item_id).user_id).name %></td>
-        <td><%= Item.find(u.item_id).name %></td>
-        <td><%= u.price %></td>
-        <td><%= u.timestamp %></td>
-        </tr>
-    <%end%>
-
+        
+            <tr>
+            <td><%= User.find(Item.find(u.item_id).user_id).name %></td>
+            <td><%= Item.find(u.item_id).name %></td>
+            <% if(Item.find(u.item_id).picture.attached?) %>
+                <td><%= image_tag Item.find(u.item_id).picture.variant(:thumb100) %></td>
+            <% else %>
+                <td>This item does not have a picture</td>
+            <% end %>
+            <td><%= u.price %></td>
+            <td><%= u.timestamp %></td>
+            </tr>
+        <%end%>
+ 
 </table>

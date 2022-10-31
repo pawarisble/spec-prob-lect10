@@ -4,18 +4,26 @@
 
     <th>Item_name</th>
     <th>Item_price</th>
+    <th>Picture of item</th>
     <th>Stock</th>
     <th>Edit</th>
     <th>Delete</th>
 
     <% @user.items.each do |u| %>
-        <tr>
-            <td><%= u.name %></td>
-            <td><%= u.price %></td>
-            <td><%= u.stock %></td>
-            <td><%= link_to 'EDIT', '/items/' + u.id.to_s + '/edit?from_user_item=true' %></td>
-            <td><%= button_to "DELETE", main_user_item_del_path, params:{ id: u.id} %></td>
-        </tr>
+        <% if(u.stock >0) %>
+            <tr>
+                <td><%= u.name %></td>
+                <td><%= u.price %></td>
+                <% if(u.picture.attached?) %>
+                        <td><%= image_tag u.picture.variant(:thumb100) %></td>
+                <% else %>
+                        <td>This item does not have a picture</td>
+                <% end %>
+                <td><%= u.stock %></td>
+                <td><%= link_to 'EDIT', '/items/' + u.id.to_s + '/edit?from_user_item=true' %></td>
+                <td><%= button_to "DELETE", main_user_item_del_path, params:{ id: u.id} %></td>
+            </tr>
+        <%end%>
     <%end%>
     
     <%= link_to 'New Item', '/items/new?from_user_item=true' %></td>
